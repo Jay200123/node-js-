@@ -3,6 +3,7 @@ const { query } = require('express')
 const express = require('express')
 const Joi = require('joi')
 const mysql = require('mysql')
+const cors = require('cors')
 require('dotenv').config()
 
 // const schema = Joi.object( {
@@ -52,6 +53,7 @@ const customers = [
 ]
 
 app.use(express.json())
+app.use(cors())
 
 const schema = Joi.object( {
     name: Joi.string().min(3).required()
