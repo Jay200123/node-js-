@@ -4,13 +4,21 @@ const express = require('express')
 const Joi = require('joi')
 const mysql = require('mysql')
 const cors = require('cors')
-require('dotenv').config()
+const itemRoutes = require("./routes/item");
 
+require('dotenv').config()
+const api = process.env.API_URL;
+
+const app = express()
+app.use(express.json())
+app.use(cors())
+app.use(`${api}/items`, itemRoutes);
+
+
+module.exports = con
 // const schema = Joi.object( {
 //     name: Joi.string().min(3).required()
 // })
-
-const app = express()
 
 //printing hello world
 app.get('/', (req, res) => {
@@ -51,9 +59,6 @@ const customers = [
     { id: 2, name: 'mike'},
     { id: 3, name: 'bron'},
 ]
-
-app.use(express.json())
-app.use(cors())
 
 const schema = Joi.object( {
     name: Joi.string().min(3).required()
