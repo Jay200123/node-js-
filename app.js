@@ -1,10 +1,11 @@
-const { json } = require('body-parser')
-const { query } = require('express')
+// const { json } = require('body-parser')
+// const { query } = require('express')
 const express = require('express')
 const Joi = require('joi')
 const mysql = require('mysql')
 const cors = require('cors')
 const itemRoutes = require("./routes/item");
+// const uploadOptions = multer({ storage: storage });
 
 require('dotenv').config()
 const api = process.env.API_URL;
@@ -13,9 +14,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 app.use(`${api}/items`, itemRoutes);
-
-
-module.exports = con
+app.use("public/uploads", express.static(__dirname + "public/uploads"));
 // const schema = Joi.object( {
 //     name: Joi.string().min(3).required()
 // })
@@ -123,20 +122,22 @@ function validateCustomer(customer) {
     return schema.validate(customer)
 }
 
-var con = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
-});
+// var con = mysql.createConnection({
+//     host: process.env.HOST,
+//     user: process.env.USER,
+//     password: process.env.PASSWORD,
+//     database: process.env.DATABASE
+// });
 
-con.connect(function(err){
-    if(err){
-        return console.error('error: ' + err.message);
-    }
+// con.connect(function(err){
+//     if(err){
+//         return console.error('error: ' + err.message);
+//     }
 
-    console.log('Connected to MySQL Server');
-})
+//     console.log('Connected to MySQL Server');
+// })
+
+
 
 app.get('/api/items', (req, res) => {
     let sql = `SELECT * FROM item`;

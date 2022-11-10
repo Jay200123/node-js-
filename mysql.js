@@ -1,4 +1,13 @@
-const mysql = require('mysql');
+const express = require('express')
+const Joi = require('joi')
+const mysql = require('mysql')
+const cors = require('cors')
+const { connect } = require('./routes/item')
+
+require('dotenv').config()
+const app = express()
+app.use(express.json())
+app.use(cors())
 
 var con = mysql.createConnection({
     host: process.env.HOST,
@@ -15,4 +24,6 @@ con.connect(function (err) {
     console.log('Connected to the MySQL server.');
 });
 
-// module.exports = con
+module.exports = con
+
+
